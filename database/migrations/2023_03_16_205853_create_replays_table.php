@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('replays', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Comment::class);
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Comment::class)->constrained();
             $table->text('message');
             $table->timestamps();
         });

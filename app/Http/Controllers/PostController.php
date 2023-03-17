@@ -12,7 +12,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
     public function getPosts()
     {
@@ -25,15 +26,23 @@ class PostController extends Controller
     }
     public function store(Request $request)
     {
-        //am using ajax
+        //am using ajax to render the data dynamically so returning response as json format
+
+        //validation to check if the fields are empty and if the data is correct
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        //if validation fails return errors to the ajax request
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+
+        //if validation passes then store the data in the database and store the image in folder so that it can be displayed later
+
         $image = $request->file('image')->store('images');
         $form_data = array(
             'title' => $request->title,
