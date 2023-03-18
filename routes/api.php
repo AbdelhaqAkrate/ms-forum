@@ -20,10 +20,3 @@ use App\Http\Controllers\CommentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//secure api routes
-Route::controller('posts', PostController::class)->middleware('auth')->group(function () {
-    Route::get('posts/{post}', [PostController::class, 'postDetails']);
-    Route::post('save', [PostController::class, 'store']);
-    Route::post('posts/new-comment', [CommentController::class, 'store']);
-    Route::get('posts/delete-comment/{id}', [CommentController::class, 'delete']);
-});
