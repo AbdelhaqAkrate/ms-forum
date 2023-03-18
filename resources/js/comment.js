@@ -21,9 +21,6 @@ $(document).ready(function () {
                     data.user.name +
                     `</p>
                         <p class="block ml-2">` +
-                    data.body +
-                    `</p>
-                        <p class="block ml-2">` +
                     data.created_at +
                     `</p>
                     </div>
@@ -34,6 +31,21 @@ $(document).ready(function () {
             },
             error: function (data) {
                 console.log(data);
+            },
+        });
+    });
+
+    $(".btn-delete").click(function () {
+        var commentId = $(this).data("id");
+        $.ajax({
+            url: "http://localhost:8000/posts/delete-comment/" + commentId,
+            type: "DELETE",
+            dataType: "json",
+            success: function (response) {
+                alert(response.message);
+            },
+            error: function (response) {
+                console.log(response);
             },
         });
     });

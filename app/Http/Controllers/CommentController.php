@@ -18,6 +18,7 @@ class CommentController extends Controller
         $comment->post_id = $request->post_id;
         $comment->user_id = auth()->user()->id;
         $comment->save();
+        $comment = Comment::find($comment->id);
         return response()->json($comment);
     }
     public function update(Request $request, Comment $comment)
@@ -29,8 +30,9 @@ class CommentController extends Controller
         $comment->save();
         return response()->json($comment);
     }
-    public function delete(Comment $comment)
+    public function delete($id)
     {
+        $comment = Comment::find($id);
         $comment->delete();
         return response()->json($comment);
     }

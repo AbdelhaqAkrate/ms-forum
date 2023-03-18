@@ -28,7 +28,7 @@
             </header>
 
 
-            <div id = "comments">
+            <div id = "comments" class= "overflow-y-auto h-96">
                <!-- chech if there is comments if there isn't write message -->
                 @if($post->comments->count() > 0)
                     @foreach($post->comments as $comment)
@@ -38,6 +38,14 @@
                         <p class="block ml-2 font-bold">{{$comment->user->name}}</p>
                         <p class="block ml-2">{{$comment->body}}</p>
                         <p class="block ml-2">{{$comment->created_at}}</p>
+
+                            <button  data-id="{{ $comment->id }}" class="ml-2 btn-delete">
+                                @csrf
+                                <svg class="h-6 w-6 text-gray-700 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
                     </div>
                             <span class="text-gray-700 font-medium ml-1">
                                {{$comment->message}}

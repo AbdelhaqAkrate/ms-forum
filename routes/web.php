@@ -31,6 +31,7 @@ Route::controller('posts', PostController::class)->middleware('auth')->group(fun
     Route::get('posts/{post}', [PostController::class, 'postDetails'])->name('postDetails');
     Route::post('save', [PostController::class, 'store']);
     Route::post('posts/new-comment', [CommentController::class, 'store']);
+    Route::delete('posts/delete-comment/{id}', [CommentController::class, 'delete']);
 
 });
 
