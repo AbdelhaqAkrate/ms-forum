@@ -21,7 +21,7 @@ $(document).ready(function () {
                     data.user.name +
                     `</p>
                         <p class="block ml-2">` +
-                    data.created_at +
+                    new Date(data.created_at) +
                     `</p>
                     </div>
                             <span class="text-gray-700 font-medium ml-1">` +
@@ -41,8 +41,15 @@ $(document).ready(function () {
             url: "http://localhost:8000/posts/delete-comment/" + commentId,
             type: "DELETE",
             dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            //fix csrf token
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
             success: function (response) {
-                alert(response.message);
+                $("#comment" + commentId).remove();
             },
             error: function (response) {
                 console.log(response);

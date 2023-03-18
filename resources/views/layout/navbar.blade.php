@@ -2,8 +2,9 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex-shrink-0 flex items-center">
-
+        <a href="{{ route('posts') }}">
         <h2 class="text-2xl font-bold"><span class=" text-green-500">O</span>cp<span class= "text-green-500">M</span>s</h2>
+        </a>
         </div>
       <div class="flex items-center">
         @auth

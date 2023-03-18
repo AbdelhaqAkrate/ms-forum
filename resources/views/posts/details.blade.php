@@ -32,24 +32,28 @@
                <!-- chech if there is comments if there isn't write message -->
                 @if($post->comments->count() > 0)
                     @foreach($post->comments as $comment)
-                    <div class="flex items-center py-4">
+                    <div id="comment{{ $comment->id }}">
+                    <div class="flex items-center py-4" >
                         <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" class="h-9 w-9 rounded-full object-cover"
                             alt="user" />
                         <p class="block ml-2 font-bold">{{$comment->user->name}}</p>
                         <p class="block ml-2">{{$comment->body}}</p>
                         <p class="block ml-2">{{$comment->created_at}}</p>
-
+                        @if($comment->user_id == Auth::user()->id)
                             <button  data-id="{{ $comment->id }}" class="ml-2 btn-delete">
                                 @csrf
                                 <svg class="h-6 w-6 text-gray-700 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
+                        @endif
 
                     </div>
+
                             <span class="text-gray-700 font-medium ml-1">
                                {{$comment->message}}
                             </span>
+                    </div>
                     @endforeach
                 @else
                     <p class="block ml-2">No comments yet</p>

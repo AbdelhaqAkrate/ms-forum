@@ -44,7 +44,7 @@ class PostController extends Controller
                 'image' => $request->image->store('images', 'public'),
                 'user_id' => auth()->user()->id,
             ]);
-            return response()->json(['success' => 'Data Added successfully.', 'data' => $request->all()]);
+            return response()->json(Post::find($post->id));
         }
     }
     public function postDetails(Post $post)
