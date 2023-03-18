@@ -1,4 +1,4 @@
-
+    Welcome, {{ Auth::user()->name }}!
                 <div class="border border-gray-300 p-6 grid grid-cols-1 gap-6 items-center justify-center bg-white shadow-lg rounded-lg">
                     <form method="post" id="myForm" action="{{ ('save') }}" enctype="multipart/form-data">
                         @csrf
