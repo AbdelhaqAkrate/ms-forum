@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $with = ['user', 'comments'];
-    protected $fillable = ['title', 'body', 'user_id'];
+    protected $fillable = ['title', 'description', 'image' , 'user_id'];
 
     public function comments()
     {

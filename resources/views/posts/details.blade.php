@@ -20,7 +20,13 @@
                     alt="user" />
                     <p class="block ml-2 font-bold">{{$post->user->name}}</p>
                 </a>
+
+                <!-- description -->
+                <div class="py-4">
+                    <p class="block ml-2">{{$post->description}}</p>
+                </div>
             </header>
+
 
             <div >
                <!-- chech if there is comments if there isn't write message -->
@@ -32,8 +38,10 @@
                         <p class="block ml-2 font-bold">{{$comment->user->name}}</p>
                         <p class="block ml-2">{{$comment->body}}</p>
                         <p class="block ml-2">{{$comment->created_at}}</p>
-                        
                     </div>
+                            <span class="text-gray-700 font-medium ml-1">
+                               {{$comment->message}}
+                            </span>
                     @endforeach
                 @else
                     <p class="block ml-2">No comments yet</p>
@@ -57,9 +65,9 @@
                                 </svg>
                             </span>
                         </div>
-                        <span class="text-gray-600 text-sm font-bold">2344 Likes</span>
+                        <span class="text-gray-600 text-sm font-bold">{{ $post->comments->count()}} comments</span>
                     </div>
-                    <span class="block ml-2 text-xs text-gray-600">5 minutes</span>
+                    <span class="block ml-2 text-xs text-gray-600">{{ date_format($post->created_at, 'F d, Y') }}</span>
                 </div>
 
                 <div class="pt-4 pb-1 pr-3">

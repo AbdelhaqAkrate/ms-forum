@@ -42,20 +42,19 @@ class PostController extends Controller
         }
 
         //if validation passes then store the data in the database and store the image in folder so that it can be displayed later
-
-        $image = $request->file('image')->store('images');
-        $form_data = array(
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $new_name
-        );
-       $post = Post::create($form_data);
-        return response::json($post);
+        else {
+            $post = Post::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'image' => $request->image->store('images', 'public'),
+                'user_id' => '2'
+            ]);
+            return response()->json(['success' => 'Data Added successfully.', 'data' => $request->all()]);
+        }
     }
-    public function show($id)
+    public function postDetails(Post $post)
     {
-        $post = Post::find($id);
-        return view('posts.show', compact('post'));
+        return view('posts.details', compact('post'));
     }
     public function edit($id)
     {
