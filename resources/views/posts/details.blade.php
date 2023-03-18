@@ -28,7 +28,7 @@
             </header>
 
 
-            <div >
+            <div id = "comments">
                <!-- chech if there is comments if there isn't write message -->
                 @if($post->comments->count() > 0)
                     @foreach($post->comments as $comment)
@@ -65,15 +65,18 @@
                                 </svg>
                             </span>
                         </div>
-                        <span class="text-gray-600 text-sm font-bold">{{ $post->comments->count()}} comments</span>
                     </div>
                     <span class="block ml-2 text-xs text-gray-600">{{ date_format($post->created_at, 'F d, Y') }}</span>
                 </div>
 
                 <div class="pt-4 pb-1 pr-3">
                     <div class="flex items-start">
-                        <textarea class="w-full resize-none outline-none appearance-none" aria-label="Agrega un comentario..." placeholder="Agrega un comentario..."  autocomplete="off" autocorrect="off" style="height: 36px;"></textarea>
-                        <button class="mb-2 focus:outline-none border-none bg-transparent text-blue-600">Publicar</button>
+                        <form id="newComment" action="{{ ('new-comment') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <textarea name="message" class="w-full resize-none outline-none appearance-none" aria-label="Type Something ..." placeholder="Type Something..."  autocomplete="off" autocorrect="off" style="height: 36px;"></textarea>
+                            <button class="mb-2 focus:outline-none border-none bg-transparent text-blue-600" type="submit">comment</button>
+                        </form>
                     </div>
                 </div>
             </div>

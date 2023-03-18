@@ -25,6 +25,7 @@
     </div>
 <!--  display post image-->
     <img src="{{ asset('storage/' . $post->image) }}" class="py-3"/>
+    <a href="{{ route('postDetails', $post->id) }}" class="text-xs font-semibold text-blue-500">
     <div class="flex items-center justify-between mx-4 mt-3 mb-2">
 
       <div class="flex gap-5">
@@ -33,6 +34,7 @@
       </div>
     </div>
     <div class="font-semibold text-sm mx-4 mt-2 mb-4">{{$post->comments->count()}} comments</div>
+    </a>
   </div>
 @endforeach
 </div>

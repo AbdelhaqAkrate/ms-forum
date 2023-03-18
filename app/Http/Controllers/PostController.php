@@ -15,11 +15,6 @@ class PostController extends Controller
         $posts = Post::all();
         return view('posts.index', compact('posts'));
     }
-    public function getPosts()
-    {
-        $posts = Post::all();
-        return response()->json($posts);
-    }
     public function create()
     {
         return view('posts.create');
@@ -47,7 +42,7 @@ class PostController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'image' => $request->image->store('images', 'public'),
-                'user_id' => '2'
+                'user_id' => auth()->user()->id,
             ]);
             return response()->json(['success' => 'Data Added successfully.', 'data' => $request->all()]);
         }
@@ -61,5 +56,31 @@ class PostController extends Controller
         $post = Post::find($id);
         return response()->json($post);
     }
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        } else {
+            $post = Post::find($id);
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->image = $request->image->store('images', 'public');
+            $post->save();
+            return response()->json(['success' => 'Data is successfully updated']);
+        }
+    }
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return response()->json(['success' => 'Data is successfully deleted']);
+    }
+
 
 }

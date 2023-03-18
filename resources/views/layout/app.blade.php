@@ -11,6 +11,7 @@
 <body>
     @yield('content')
     @vite('resources/js/post.js')
+    @vite('resources/js/comment.js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.1.1/dist/cdn.min.js"></script>
 </body>

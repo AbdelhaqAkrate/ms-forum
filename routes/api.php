@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //secure api routes
 Route::controller('posts', PostController::class)->middleware('auth')->group(function () {
-    Route::get('posts', [PostController::class, 'getPosts']);
     Route::get('posts/{post}', [PostController::class, 'postDetails']);
     Route::post('save', [PostController::class, 'store']);
+    Route::post('posts/new-comment', [CommentController::class, 'store']);
 });

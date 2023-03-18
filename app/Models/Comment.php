@@ -13,7 +13,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $with = ["user", "replays"];
-    
+
     public $fillable =["message", "post_id", "user_id"];
     public function replays(){
         return $this->hasMany(Replay::class);

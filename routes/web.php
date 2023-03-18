@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,8 +28,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 
 Route::controller('posts', PostController::class)->middleware('auth')->group(function () {
     Route::get('posts', [PostController::class, 'index'])->name('posts');
-    Route::get('posts/{post}', [PostController::class, 'postDetails']);
+    Route::get('posts/{post}', [PostController::class, 'postDetails'])->name('postDetails');
     Route::post('save', [PostController::class, 'store']);
+    Route::post('posts/new-comment', [CommentController::class, 'store']);
 
 });
 
