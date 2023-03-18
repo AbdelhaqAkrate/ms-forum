@@ -19,6 +19,9 @@ use App\Http\Controllers\PostController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('posts', [PostController::class, 'getPosts']);
-Route::get('posts/{post}', [PostController::class, 'postDetails']);
-Route::post('save', [PostController::class, 'store']);
+//secure api routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('posts', [PostController::class, 'getPosts']);
+    Route::get('posts/{post}', [PostController::class, 'postDetails']);
+    Route::post('save', [PostController::class, 'store']);
+});
